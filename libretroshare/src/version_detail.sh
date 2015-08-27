@@ -4,8 +4,11 @@
 set +e
 
 if ( git log -n 1 &> /dev/null); then
-	#retrieve git information
-	version="$(git log --pretty=format:"%H" | head -1 | cut -c1-8)"
+	commitdate=$(git log -1 --date=short --pretty=format:%cd)
+	version="${commitdate//[-]/}" # Eliminate Hypens in Date
+	#New RetroShare 0.6.0x Revision 20150816
+	#Old version="$(git log --pretty=format:"%H" | head -1 | cut -c1-8)"
+	#Old RetroShare 0.6.0x Revision 1a1a2aa1
 fi
 
 # if ( git log -n 1 | grep svn &> /dev/null); then
